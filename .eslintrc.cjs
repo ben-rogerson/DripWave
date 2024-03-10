@@ -22,6 +22,7 @@ module.exports = {
       { allowConstantExport: true },
     ],
     'react/jsx-sort-props': 'off',
+    'react/jsx-no-leaked-render': 'off',
     'react/function-component-definition': 'off',
     '@typescript-eslint/explicit-function-return-type': 'off',
     '@typescript-eslint/no-unused-vars': ['warn', { argsIgnorePattern: '^_' }],
