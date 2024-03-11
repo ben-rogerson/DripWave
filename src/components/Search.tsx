@@ -27,11 +27,11 @@ export const Search = (props: { inProgress: boolean }) => {
   }, [value, defaultValue])
 
   return (
-    <div className="@container/search relative">
+    <div className="relative @container/search">
       <Indicator inProgress={props.inProgress} />
       <input
         type="text"
-        className="@xs/search:text-xl @sm/search:text-2xl @xs/search:pl-[2.15rem] h-full w-full bg-transparent py-4 pl-8 text-lg caret-primary outline-none"
+        className="h-full w-full bg-transparent py-4 pl-8 text-lg caret-primary outline-none @xs/search:pl-[2.15rem] @xs/search:text-xl @sm/search:text-2xl"
         placeholder="Search Artists&hellip;"
         // Controlled input so we can update it when the search param changes.
         // This allows links that trigger a search to work.
@@ -48,18 +48,14 @@ const Indicator = (props: { inProgress: boolean }) => {
     <div className="pointer-events-none absolute h-full text-2xl text-muted">
       <IconSearch
         className={cn(
-          'absolute h-full text-2xl transition-all delay-75 ease-out',
-          {
-            'scale-50 opacity-0': props.inProgress,
-          }
+          'absolute h-full text-2xl transition-all delay-75 duration-700 ease-out',
+          { 'scale-50 opacity-0': props.inProgress }
         )}
       />
       <div
         className={cn(
-          'ease absolute inline-block h-full scale-100 text-primary transition-all delay-75 duration-300',
-          {
-            'scale-150 opacity-0': !props.inProgress,
-          }
+          'ease absolute inline-block h-full scale-100 text-primary transition-all delay-75 duration-700',
+          { 'scale-150 opacity-0': !props.inProgress }
         )}
       >
         <IconDisc className="h-full animate-spin" />

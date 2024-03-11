@@ -45,21 +45,13 @@ export const IconAudio = (props: { className?: string }) => (
 
 export const IconPause = (props: { className?: string }) => (
   <Icon {...props}>
-    <path
-      fill="currentColor"
-      d="M15 16h-2V8h2m-4 8H9V8h2m1-6A10 10 0 0 0 2 12a10 10 0 0 0 10 10a10 10 0 0 0 10-10A10 10 0 0 0 12 2"
-      vectorEffect="non-scaling-stroke"
-    />
+    <path d="M6 4h4v16H6zm8 0h4v16h-4z" vectorEffect="non-scaling-stroke" />
   </Icon>
 )
 
 export const IconPlay = (props: { className?: string }) => (
   <Icon {...props}>
-    <path
-      fill="currentColor"
-      d="M10 16.5v-9l6 4.5M12 2A10 10 0 0 0 2 12a10 10 0 0 0 10 10a10 10 0 0 0 10-10A10 10 0 0 0 12 2"
-      vectorEffect="non-scaling-stroke"
-    />
+    <path d="m6 3 14 9-14 9z" vectorEffect="non-scaling-stroke" />
   </Icon>
 )
 

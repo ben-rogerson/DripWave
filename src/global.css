@@ -32,7 +32,7 @@
   }
   html,
   .overflow-y-scroll {
-    transition: all 0.75s;
+    transition: scrollbar-color 0.75s ease-in-out;
     scrollbar-color: hsl(var(--accent)) transparent;
     scrollbar-width: thin;
   }
@@ -42,9 +42,13 @@
   }
   body {
     @apply bg-background text-foreground;
-    @apply min-h-screen select-none overflow-y-scroll;
+    @apply min-h-[100dvh] select-none overflow-y-scroll;
     font-family: LilGrotesk;
   }
+}
+
+#root {
+  @apply min-h-inherit;
 }
 
 @font-face {
@@ -85,7 +89,7 @@ svg {
 }
 
 .player-small.rhap_container {
-  @apply px-5 py-3;
+  @apply p-5;
 }
 
 .rhap_progress-section {
@@ -97,7 +101,7 @@ svg {
 }
 
 .player-large .rhap_progress-section {
-  @apply pb-3 pt-6;
+  @apply pb-3 pt-7;
 }
 
 .rhap_progress-container {
@@ -112,6 +116,11 @@ svg {
   @apply px-2;
 } */
 
+.rhap_progress-container {
+  /* Extra bar drag space */
+  @apply -my-5 py-5;
+}
+
 .rhap_progress-bar {
   @apply relative z-0 h-[5px] w-full rounded bg-border;
 }
@@ -121,7 +130,15 @@ svg {
 }
 
 .rhap_progress-indicator {
-  @apply absolute top-[-8px] z-[3] ml-[-10px] h-[20px] w-[20px] rounded-full bg-primary;
+  @apply shadow-[0_0_.75rem_.25rem_hsl(var(--background)),0_0_0_0_hsl(var(--primary))] transition-shadow duration-500;
+}
+
+.rhap_play-status--playing .rhap_progress-indicator {
+  @apply shadow-[0_0_.9rem_.15rem_hsl(var(--background)),0_0_.4rem_.1rem_hsl(var(--primary))];
+}
+
+.rhap_progress-indicator {
+  @apply absolute top-[-8px] z-[3] ml-[-10px] h-[20px] w-[20px] rounded-full bg-primary shadow-[0_0_.75rem_.15rem_hsl(var(--background))];
 }
 
 .player-large .rhap_progress-indicator {
