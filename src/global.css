@@ -47,6 +47,11 @@
   }
 }
 
+:focus-visible {
+  outline: hsl(var(--primary)) dashed 3px;
+  outline-offset: -2px;
+}
+
 #root {
   @apply min-h-inherit;
 }

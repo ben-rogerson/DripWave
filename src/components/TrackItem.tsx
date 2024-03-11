@@ -1,5 +1,5 @@
 import type { Track } from '@spotify/web-api-ts-sdk'
-import type { ReactNode } from 'react'
+import { type ReactNode } from 'react'
 import { cn } from '@/utils/cn'
 import { IconAudio, IconPause, IconPlay, IconTop } from '@/components/Icons'
 import { TrackImage } from '@/components/TrackImage'
@@ -75,10 +75,14 @@ export const TrackItem = (props: {
           </>
         }
       />
-      <div className="absolute inset-0 z-behind bg-accent opacity-0 mix-blend-overlay shadow-2xl group-hover:opacity-100 [.container-detail_&]:rounded-lg md:[.container-side_&]:rounded-r-lg" />
+      <BackgroundSelector />
     </button>
   )
 }
+
+const BackgroundSelector = () => (
+  <div className="absolute inset-0 z-behind bg-border opacity-0 mix-blend-overlay shadow-2xl group-hover:opacity-25 group-focus:opacity-75 [.container-detail_&]:mx-2 [.container-detail_&]:rounded-lg md:[.container-side_&]:rounded-r-lg" />
+)
 
 const Indicator = (props: {
   showPlaying: boolean
@@ -91,7 +95,6 @@ const Indicator = (props: {
         <div
           className={cn(
             'absolute z-10 grid h-full w-full place-content-center',
-            // 'text-2xl @lg/trackItem:text-3xl',
             'opacity-0 transition-all duration-500 group-hover:opacity-100',
             '-rotate-45 scale-75 ease-out group-hover:rotate-0 group-hover:scale-100'
           )}
@@ -101,7 +104,6 @@ const Indicator = (props: {
       )}
       <div
         className={cn(
-          // 'text-sm @md/trackItem:text-lg',
           'grid h-inherit w-inherit place-content-center',
           props.isSelected && 'group-hover:opacity-0'
         )}
@@ -118,7 +120,6 @@ const Indicator = (props: {
         <div
           className={cn(
             'transition-opacity duration-500',
-            // '@xs/trackItem:text-sm',
             props.showPlaying && 'text-primary opacity-0'
           )}
         >

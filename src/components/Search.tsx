@@ -1,12 +1,14 @@
-import { useEffect, useState } from 'react'
+import { memo, useEffect, useState } from 'react'
 import { useSearch } from 'wouter'
 import { useSetSearchParam } from '@/hooks/useSetSearchParam'
 import { cn } from '@/utils/cn'
 import { titleCase } from '@/utils/titleCase'
 import { IconDisc, IconSearch } from '@/components/Icons'
 import { PARAM_SEARCH } from '@/constants'
+import { useArtistTracks } from '@/hooks/useArtistTracks'
 
-export const Search = (props: { inProgress: boolean }) => {
+export const SearchView = () => {
+  const { isFetching } = useArtistTracks()
   const defaultValue = new URLSearchParams(useSearch()).get(PARAM_SEARCH) ?? ''
   const [value, setValue] = useState(defaultValue)
   const setSearchParam = useSetSearchParam()
@@ -28,7 +30,7 @@ export const Search = (props: { inProgress: boolean }) => {
 
   return (
     <div className="relative @container/search">
-      <Indicator inProgress={props.inProgress} />
+      <Indicator inProgress={isFetching} />
       <input
         type="text"
         className="h-full w-full bg-transparent py-4 pl-8 text-lg caret-primary outline-none @xs/search:pl-[2.15rem] @xs/search:text-xl @sm/search:text-2xl"
@@ -42,6 +44,8 @@ export const Search = (props: { inProgress: boolean }) => {
     </div>
   )
 }
+
+export const Search = memo(SearchView)
 
 const Indicator = (props: { inProgress: boolean }) => {
   return (
