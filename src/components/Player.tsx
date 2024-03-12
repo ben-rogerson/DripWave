@@ -14,11 +14,11 @@ export const Player = (props: { isLarge?: boolean }) => {
     () => {
       if (!props.isLarge) return
       if (!largePlayerRef.current) return
-      // @ts-expect-error - Current is not readonly in this case
+      // @ts-expect-error - Current is not read-only in this case
       largePlayerRef.current.audio.current =
         smallPlayerRef.current?.audio.current
     },
-    // eslint-disable-next-line react-hooks/exhaustive-deps -- Only run once
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- Only run on load
     []
   )
 
@@ -26,21 +26,22 @@ export const Player = (props: { isLarge?: boolean }) => {
   useEffect(
     () => {
       const isSmallVisible =
-        // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- The types are wrong here (checkVisibility isn't available in mobile chrome)
-        smallPlayerRef.current?.container.current?.checkVisibility?.() ?? true
+        (smallPlayerRef.current?.container.current?.clientHeight || 0) > 0
       setHasAutoPlay(isSmallVisible)
     },
-    // eslint-disable-next-line react-hooks/exhaustive-deps -- Avoid useless dep
-    [selectedTrack]
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- Avoid smallPlayerRef dep
+    [selectedTrack?.id]
   )
 
-  // When traversing between small and large player, avoid auto play on first selection
   useEffect(
     () => {
-      if (hasAutoPlay) return
-      smallPlayerRef.current?.audio.current?.pause()
+      if (!hasAutoPlay) {
+        smallPlayerRef.current?.audio.current?.pause()
+        return
+      }
+      void smallPlayerRef.current?.audio.current?.play()
     },
-    // eslint-disable-next-line react-hooks/exhaustive-deps -- Avoid useless dep
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- Avoid smallPlayerRef dep
     [hasAutoPlay]
   )
 
@@ -111,8 +112,6 @@ export const Player = (props: { isLarge?: boolean }) => {
 
   return (
     <AudioPlayer
-      autoPlay={hasAutoPlay}
-      autoPlayAfterSrcChange={hasAutoPlay}
       customAdditionalControls={[]} // Remove loop button
       customVolumeControls={[]} // Remove volume controls
       showJumpControls={false}
