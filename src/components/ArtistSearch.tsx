@@ -46,10 +46,10 @@ export const ArtistSearch = () => {
                 <ArtistLink>Goth Babe</ArtistLink>
               </li>
               <li>
-                <ArtistLink>Audioslave</ArtistLink>
+                <ArtistLink>Little Dragon</ArtistLink>
               </li>
               <li>
-                <ArtistLink>Boo Seeka</ArtistLink>
+                <ArtistLink>Kishi Bashi</ArtistLink>
               </li>
               <li>
                 <ArtistLink>TesseracT</ArtistLink>
@@ -92,6 +92,7 @@ export const ArtistSearch = () => {
                 isSelected={selectedTrack?.id === track.id}
                 isPlaying={playingTrackId === track.id}
                 isPaused={selectedTrack?.id === track.id && !playingTrackId}
+                canPlay={Boolean(track.preview_url)}
                 style={{ animationDelay: `${index * 0.05}s` }}
                 hasEnterSlide
                 onSelect={() => {

@@ -42,7 +42,7 @@ export const TrackDetail = () => {
       <div className="sticky top-0 z-10 overflow-hidden bg-background shadow-2xl shadow-background">
         <Player
           // Re-render image with key for fade-in effect
-          key={selectedTrack.album.id}
+          key={selectedTrack.id}
           isLarge
         />
       </div>
@@ -91,6 +91,7 @@ export const TrackDetail = () => {
                 isTopTrack={tracks.some(t => t.id === track.id)}
                 isPlaying={playingTrackId === track.id}
                 isPaused={selectedTrack.id === track.id && !playingTrackId}
+                canPlay={Boolean(track.preview_url)}
                 style={{ animationDelay: `${index * 0.05}s` }}
                 hasEnterSlide={albumTracks.length > 2}
                 onSelect={() => {

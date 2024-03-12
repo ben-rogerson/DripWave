@@ -5,98 +5,95 @@ import { IconAudio, IconPause, IconPlay, IconTop } from '@/components/Icons'
 import { TrackImage } from '@/components/TrackImage'
 
 export const TrackItem = (props: {
-  onSelect: () => void
+  id?: string
+  image?: Track['album']['images'][0]
+  album?: string
+  title: string
+  artists: string
+  trackNumber: number
+  albumYear?: string
+  releaseType?: string
+  isTopTrack?: boolean
   isSelected: boolean
   isPlaying: boolean
   isPaused: boolean
-  trackNumber: number
-  title: string
-  artists: string
-  image?: Track['album']['images'][0]
-  album?: string
-  albumYear?: string
-  releaseType?: string
-  id?: string
-  isTopTrack?: boolean
+  canPlay: boolean
   hasEnterSlide?: boolean
   style?: React.CSSProperties
-}) => {
-  return (
-    <button
-      type="button"
-      className={cn(
-        'group block w-full text-left @container/trackItem',
-        props.isSelected ? 'text-primary' : 'text-muted',
-        'duration-1000 ease-out animate-in fade-in-0 fill-mode-backwards',
-        props.hasEnterSlide && 'slide-in-from-top-2'
-      )}
-      style={props.style}
-      onClick={props.onSelect}
-      id={`track-${props.id}`}
-    >
-      <Layout
-        className="py-2 pl-1 pr-5 @md/trackItem:py-3"
-        indicator={
-          <Indicator
-            showPlaying={props.isPlaying && props.isSelected}
-            isSelected={props.isSelected}
-          >
-            {props.trackNumber}
-          </Indicator>
-        }
-        image={
-          props.image && <TrackImage title={props.title} {...props.image} />
-        }
-        meta={
-          <div className="flex items-center justify-between gap-2">
-            <div className="w-full overflow-hidden">
-              <div
-                className={cn(
-                  'truncate font-bold !leading-snug @sm/trackItem:text-lg @xl/trackItem:text-xl',
-                  !props.isSelected && 'text-foreground'
-                )}
-              >
-                {props.title}
-              </div>
-              <div className="truncate  @sm/trackItem:text-lg">
-                {props.artists}
-              </div>
-              {props.album && (
-                <div className="flex items-center gap-1.5 text-xs uppercase tracking-wide text-muted/50 @sm/trackItem:text-sm @md/trackItem:mt-1">
-                  {props.releaseType === 'single' &&
-                  props.album === props.title ? (
-                    <span className="italic">Single</span>
-                  ) : (
-                    <span className="max-w-[calc(100%-6ch)] truncate">
-                      {props.album}
-                    </span>
-                  )}
-                  <span className="text-muted/50">&middot;</span>
-                  <span>{props.albumYear}</span>
-                </div>
+  onSelect: () => void
+}) => (
+  <button
+    type="button"
+    className={cn(
+      'group block w-full text-left @container/trackItem',
+      props.isSelected ? 'text-primary' : 'text-muted',
+      'duration-1000 ease-out animate-in fade-in-0 fill-mode-backwards',
+      props.hasEnterSlide && 'slide-in-from-top-2'
+    )}
+    style={props.style}
+    onClick={props.onSelect}
+    id={`track-${props.id}`}
+  >
+    <Layout
+      className="py-2 pl-1 pr-5 @md/trackItem:py-3"
+      indicator={
+        <Indicator
+          showPlaying={props.isPlaying && props.isSelected}
+          isSelected={props.canPlay && props.isSelected}
+        >
+          {props.trackNumber}
+        </Indicator>
+      }
+      image={props.image && <TrackImage title={props.title} {...props.image} />}
+      meta={
+        <div className="flex items-center justify-between gap-2">
+          <div className="w-full overflow-hidden">
+            <div
+              className={cn(
+                'truncate font-bold !leading-snug @sm/trackItem:text-lg @xl/trackItem:text-xl',
+                !props.isSelected && 'text-foreground'
               )}
+            >
+              {props.title}
             </div>
-            {props.isTopTrack && (
-              <button
-                type="button"
-                onClick={e => {
-                  e.stopPropagation() // Avoid triggering onSelect
-                }}
-                className="group/top relative px-3 text-xl"
-              >
-                <div className="pointer-events-none absolute right-full -mr-1 -mt-0.5 whitespace-nowrap rounded bg-background/80 px-2 py-1 text-sm text-foreground opacity-0 transition-opacity group-hover/top:opacity-100 group-focus/top:opacity-100">
-                  Top track
-                </div>
-                <IconTop className="group-hover/top:text-foreground" />
-              </button>
+            <div className="truncate  @sm/trackItem:text-lg">
+              {props.artists}
+            </div>
+            {props.album && (
+              <div className="flex items-center gap-1.5 text-xs uppercase tracking-wide text-muted/50 @sm/trackItem:text-sm @md/trackItem:mt-1">
+                {props.releaseType === 'single' &&
+                props.album === props.title ? (
+                  <span className="italic">Single</span>
+                ) : (
+                  <span className="max-w-[calc(100%-6ch)] truncate">
+                    {props.album}
+                  </span>
+                )}
+                <span className="text-muted/50">&middot;</span>
+                <span>{props.albumYear}</span>
+              </div>
             )}
           </div>
-        }
-      />
-      <BackgroundSelector />
-    </button>
-  )
-}
+          {props.isTopTrack && (
+            <button
+              type="button"
+              onClick={e => {
+                e.stopPropagation() // Avoid triggering onSelect
+              }}
+              className="group/top relative px-3 text-xl"
+            >
+              <div className="pointer-events-none absolute right-full -mr-1 -mt-0.5 whitespace-nowrap rounded bg-background/80 px-2 py-1 text-sm text-foreground opacity-0 transition-opacity group-hover/top:opacity-100 group-focus/top:opacity-100">
+                Top track
+              </div>
+              <IconTop className="group-hover/top:text-foreground" />
+            </button>
+          )}
+        </div>
+      }
+    />
+    <BackgroundSelector />
+  </button>
+)
 
 const BackgroundSelector = () => (
   <div className="absolute inset-0 z-behind bg-border opacity-0 mix-blend-overlay shadow-2xl group-hover:opacity-25 group-focus:opacity-75 [.container-detail_&]:mx-2 [.container-detail_&]:rounded-lg md:[.container-side_&]:rounded-r-lg" />

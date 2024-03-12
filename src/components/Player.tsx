@@ -53,14 +53,21 @@ export const Player = (props: { isLarge?: boolean }) => {
     setPlayingTrackId('')
   }
 
-  if (!selectedTrack?.preview_url) return
+  if (!selectedTrack) return
 
   const sizeConfig = props.isLarge
     ? {
         ref: largePlayerRef,
+        customControlsSection: [
+          selectedTrack.preview_url ? RHAP_UI.PROGRESS_BAR : <NoPreview />,
+        ],
         customProgressBarSection: [
           <div key="empty" />,
-          RHAP_UI.MAIN_CONTROLS,
+          selectedTrack.preview_url ? (
+            RHAP_UI.MAIN_CONTROLS
+          ) : (
+            <div key="empty" />
+          ),
           <div
             key="meta"
             className="ml-4 flex items-center gap-7 overflow-hidden"
@@ -78,9 +85,13 @@ export const Player = (props: { isLarge?: boolean }) => {
       }
     : {
         ref: smallPlayerRef,
-        src: selectedTrack.preview_url,
+        src: selectedTrack.preview_url ?? '',
         customControlsSection: [
-          RHAP_UI.MAIN_CONTROLS,
+          selectedTrack.preview_url ? (
+            RHAP_UI.MAIN_CONTROLS
+          ) : (
+            <div key="empty" />
+          ),
           <div
             key={selectedTrack.name}
             className="flex flex-col justify-center delay-500 duration-500 ease-out animate-in fade-in-0 slide-in-from-bottom-2 fill-mode-backwards"
@@ -93,22 +104,33 @@ export const Player = (props: { isLarge?: boolean }) => {
             </div>
           </div>,
         ],
-        customProgressBarSection: [RHAP_UI.PROGRESS_BAR],
+        customProgressBarSection: [
+          selectedTrack.preview_url ? RHAP_UI.PROGRESS_BAR : <NoPreview />,
+        ],
       }
 
   return (
     <AudioPlayer
       autoPlay={hasAutoPlay}
       autoPlayAfterSrcChange={hasAutoPlay}
-      customControlsSection={[RHAP_UI.PROGRESS_BAR]}
       customAdditionalControls={[]} // Remove loop button
       customVolumeControls={[]} // Remove volume controls
       showJumpControls={false}
       onPlaying={handlePlay}
       onPause={handleClear}
       onEnded={handleClear}
+      onAbort={handleClear}
       className={props.isLarge ? 'player-large' : 'player-small'}
       {...sizeConfig}
     />
   )
 }
+
+const NoPreview = () => (
+  <div
+    key="no-preview"
+    className="px-1 py-5 text-base font-bold text-destructive"
+  >
+    No track preview available
+  </div>
+)
