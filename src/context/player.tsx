@@ -2,7 +2,6 @@ import { type Track } from '@spotify/web-api-ts-sdk'
 import { createContext, useState, createRef, useCallback } from 'react'
 import type { ReactNode } from 'react'
 import type AudioPlayer from 'react-h5-audio-player'
-import { useLocation } from 'wouter'
 
 interface PlayerContextType {
   selectedTrack?: Track
@@ -16,7 +15,6 @@ export const PlayerProvider = (props: { children: ReactNode }) => {
   const smallPlayerRef = createRef<AudioPlayer>()
   const [selectedTrack, setSelectedTrack] = useState<Track>()
   const [playingTrackId, setPlayingTrackId] = useState<string>()
-  const [, navigate] = useLocation()
 
   const setSelectedTrackCached = useCallback(
     (track: Track) => {
@@ -33,9 +31,8 @@ export const PlayerProvider = (props: { children: ReactNode }) => {
       }
 
       setSelectedTrack(track)
-      navigate(`/${track.album.id}/${window.location.search}`)
     },
-    [navigate, playingTrackId, selectedTrack, smallPlayerRef]
+    [playingTrackId, selectedTrack, smallPlayerRef]
   )
 
   return (
