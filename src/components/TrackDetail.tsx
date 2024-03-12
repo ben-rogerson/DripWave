@@ -1,4 +1,5 @@
-import { AriaRole, memo, type ReactNode } from 'react'
+import type { AriaRole } from 'react'
+import { memo, type ReactNode } from 'react'
 import { TrackImage } from '@/components/TrackImage'
 import { TrackItem } from '@/components/TrackItem'
 import { Player } from '@/components/Player'

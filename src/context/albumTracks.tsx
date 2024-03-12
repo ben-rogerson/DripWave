@@ -1,4 +1,4 @@
-import { createContext, useEffect, type ReactNode } from 'react'
+import { createContext, type ReactNode } from 'react'
 import { useQuery } from '@tanstack/react-query'
 import { MARKET_AU } from '@/constants'
 import { useSpotify } from '@/hooks/useSpotify'
@@ -6,7 +6,7 @@ import { usePlayer } from '@/hooks/usePlayer'
 import type { SimplifiedTrack } from '@spotify/web-api-ts-sdk'
 import { type SpotifyApi } from '@spotify/web-api-ts-sdk'
 import { useLocation } from 'wouter'
-import { useArtistTracks } from '@/hooks/useArtistTracks'
+// import { useArtistTracks } from '@/hooks/useArtistTracks'
 
 interface AlbumTracksContextType {
   albumTracks: SimplifiedTrack[]
@@ -18,10 +18,10 @@ interface AlbumTracksContextType {
 
 export const AlbumTracksProvider = (props: { children: ReactNode }) => {
   const { sdk } = useSpotify()
-  const { selectedTrack, setSelectedTrack } = usePlayer()
-  const { tracks } = useArtistTracks()
+  const { selectedTrack } = usePlayer()
+  // const { tracks } = useArtistTracks()
   // const [location] = useLocation()
-  const [location, navigate] = useLocation()
+  const [location] = useLocation()
 
   const albumId = selectedTrack?.album.id ?? location.split('/')[1]
 
