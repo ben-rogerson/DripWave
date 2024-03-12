@@ -1,5 +1,4 @@
-import { useEffect, useState } from 'react'
-import { createRef } from 'react'
+import { useEffect, useState, createRef } from 'react'
 import AudioPlayer, { RHAP_UI } from 'react-h5-audio-player'
 import { formatArtists } from '@/utils/formatArtists'
 import { usePlayer } from '@/hooks/usePlayer'
@@ -35,11 +34,12 @@ export const Player = (props: { isLarge?: boolean }) => {
 
   useEffect(
     () => {
-      if (!hasAutoPlay) {
-        smallPlayerRef.current?.audio.current?.pause()
-        return
-      }
-      void smallPlayerRef.current?.audio.current?.play()
+      if (hasAutoPlay) return
+      /**
+       * GOTCHA: Setting autoplay attributes on <AudioPlayer /> is
+       * buggy so opted to manually pause the audio instead.
+       */
+      smallPlayerRef.current?.audio.current?.pause()
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps -- Avoid smallPlayerRef dep
     [hasAutoPlay]
