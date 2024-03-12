@@ -16,7 +16,6 @@ export const SpotifyProvider = (props: { children: ReactNode }) => {
   const sdk = useSpotify(
     String(import.meta.env.VITE_SPOTIFY_CLIENT_ID),
     String(import.meta.env.VITE_SPOTIFY_SECRET_ID),
-    String(import.meta.env.VITE_REDIRECT_TARGET),
     [] // Scopes are not required for this app
   )
 
@@ -34,7 +33,6 @@ export const SpotifyContext = createContext<SpotifyContextType | null>(null)
 const useSpotify = (
   clientId: string,
   secretId: string,
-  redirectUrl: string,
   scopes: string[],
   config?: SdkOptions
 ) => {
@@ -53,7 +51,7 @@ const useSpotify = (
       const msg = error instanceof Error ? error.message : String(error)
       console.error(msg)
     }
-  }, [clientId, redirectUrl, config, activeScopes, secretId])
+  }, [clientId, config, activeScopes, secretId])
 
   return sdk
 }
