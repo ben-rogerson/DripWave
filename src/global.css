@@ -5,46 +5,37 @@
 @layer base {
   :root {
     --background: 0 0% 0%;
-    --foreground: 0 0 100%;
-
-    --primary: 250 96% 79%;
-
-    --secondary: 210 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
-
+    --foreground: 0 100% 100%;
+    --primary: 250 96% 80%;
+    --secondary: 120 96% 80%;
     --muted: 0 0% 68%;
-    --muted-foreground: 215 20.2% 65.1%;
-
     --accent: 0 0% 6%;
-
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
-
+    --destructive: 15 96% 80%;
     --border: 0 0% 18%;
     --ring: 210 26.8% 83.9%;
     --radius: 0.5rem;
   }
 }
 
-@layer base {
-  * {
-    @apply border-border;
-  }
-  html,
-  .overflow-y-scroll {
-    transition: scrollbar-color 0.75s ease-in-out;
-    scrollbar-color: hsl(var(--accent)) transparent;
-    scrollbar-width: thin;
-  }
-  html,
-  .overflow-y-scroll:hover {
-    scrollbar-color: hsl(var(--border)) transparent;
-  }
-  body {
-    @apply bg-background text-foreground;
-    @apply min-h-[100dvh] select-none overflow-y-scroll;
-    font-family: LilGrotesk;
-  }
+* {
+  @apply border-border;
+}
+
+html,
+.overflow-y-scroll {
+  transition: scrollbar-color 0.75s ease-in-out;
+  scrollbar-color: hsl(var(--accent)) transparent;
+  scrollbar-width: thin;
+}
+
+html,
+.overflow-y-scroll:hover {
+  scrollbar-color: hsl(var(--border)) transparent;
+}
+
+body {
+  @apply min-h-[100dvh] select-none overflow-y-scroll bg-background text-foreground;
+  font-family: LilGrotesk, sans-serif;
 }
 
 :focus-visible {
@@ -72,12 +63,10 @@
   font-display: swap;
 }
 
-@font-face {
-  font-family: 'LilGrotesk';
-  src: url('/fonts/LilGrotesk-Black.woff2');
-  font-style: normal;
-  font-weight: 900;
-  font-display: swap;
+input[type='search']::-webkit-search-cancel-button {
+  /* Hide the cancel button as we use our own reset button
+  for better cross-browser support. */
+  @apply hidden;
 }
 
 svg {
@@ -89,41 +78,48 @@ svg {
 }
 
 /* Audio player */
-.rhap_container {
-  /* @apply py-2; */
-}
-
 .player-small.rhap_container {
-  @apply p-5;
+  @apply px-5 pb-4;
 }
 
 .rhap_progress-section {
   @apply flex items-center;
 }
 
-.player-small .rhap_progress-section {
-  @apply gap-3 pb-4;
+.player-small .rhap_controls-section * {
+  @apply overflow-hidden;
+}
+
+.player-small .rhap_controls-section {
+  @apply flex gap-2.5 overflow-x-hidden;
+}
+
+.player-small .rhap_main-controls {
+  @apply shrink-0 delay-100 duration-500 ease-out animate-in fade-in-0 slide-in-from-bottom-2 fill-mode-backwards;
+}
+
+.player-small .rhap_main-controls-button {
+  @apply block;
 }
 
 .player-large .rhap_progress-section {
-  @apply pb-3 pt-7;
+  @apply pt-5;
 }
 
 .rhap_progress-container {
-  @apply cursor-pointer;
+  @apply w-full cursor-pointer;
 }
 
-/* .player-small .rhap_progress-container {
-  @apply px-4;
-} */
+.player-large .rhap_progress-container {
+  @apply py-5;
+}
 
-/* .player-large .rhap_progress-container {
-  @apply px-2;
-} */
+.player-small .rhap_progress-container {
+  @apply py-4 delay-300 duration-500 ease-out animate-in fade-in-0 slide-in-from-bottom-1 fill-mode-backwards;
+}
 
-.rhap_progress-container {
-  /* Extra bar drag space */
-  @apply -my-5 py-5;
+.player-large .rhap_controls-section {
+  @apply mx-2.5;
 }
 
 .rhap_progress-bar {
@@ -154,214 +150,18 @@ svg {
   @apply visible;
 }
 
+.player-small .rhap_progress-indicator {
+  @apply scale-75;
+}
+
 .rhap_play-pause-button {
   @apply text-primary;
 }
 
 .player-small .rhap_play-pause-button {
-  @apply text-[275%];
+  @apply text-[350%];
 }
 
 .player-large .rhap_play-pause-button {
   @apply pr-0 text-[500%];
 }
-
-.rhap_main-controls {
-  @apply shrink-0 overflow-hidden;
-}
-
-/* 
-.rhap_container:focus:not(:focus-visible) {
-  outline: 0;
-}
-.rhap_container svg {
-  vertical-align: initial;
-}
-
-.rhap_header {
-  margin-bottom: 10px;
-}
-
-.rhap_footer {
-  margin-top: 5px;
-}
-
-.rhap_main {
-  display: flex;
-  flex-direction: column;
-  flex: 1 1 auto;
-}
-
-.rhap_stacked .rhap_controls-section {
-  margin-top: 8px;
-}
-
-.rhap_horizontal {
-  flex-direction: row;
-}
-.rhap_horizontal .rhap_controls-section {
-  margin-left: 8px;
-}
-
-.rhap_horizontal-reverse {
-  flex-direction: row-reverse;
-}
-.rhap_horizontal-reverse .rhap_controls-section {
-  margin-right: 8px;
-}
-
-.rhap_stacked-reverse {
-  flex-direction: column-reverse;
-}
-.rhap_stacked-reverse .rhap_controls-section {
-  margin-bottom: 8px;
-} */
-
-/* .rhap_progress-container {
-  display: flex;
-  align-items: center;
-  height: 20px;
-  flex: 1 0 auto;
-  align-self: center;
-  margin: 0 calc(10px + 1%);
-  cursor: pointer;
-  user-select: none;
-  -webkit-user-select: none;
-} */
-/* .rhap_progress-container:focus:not(:focus-visible) {
-  outline: 0;
-} */
-
-/* .rhap_time {
-  color: #333;
-  font-size: 16px;
-  user-select: none;
-  -webkit-user-select: none;
-} */
-
-/* .rhap_progress-bar-show-download {
-  background-color: green;
-} */
-
-/* .rhap_download-progress {
-  height: 100%;
-  position: absolute;
-  z-index: 1;
-  background-color: gray;
-  border-radius: 2px;
-} */
-
-/* .rhap_controls-section {
-  display: flex;
-  flex: 1 1 auto;
-  justify-content: space-between;
-  align-items: center;
-} */
-
-/* .rhap_additional-controls {
-  display: flex;
-  flex: 1 0 auto;
-  align-items: center;
-} */
-
-/* .rhap_repeat-button {
-  font-size: 26px;
-  width: 26px;
-  height: 26px;
-  color: #868686;
-  margin-right: 6px;
-} */
-
-/* .rhap_main-controls {
-  flex: 0 1 auto;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-} */
-
-/* .rhap_volume-controls {
-  display: flex;
-  flex: 1 0 auto;
-  justify-content: flex-end;
-  align-items: center;
-} */
-
-/* .rhap_volume-button {
-  flex: 0 0 26px;
-  font-size: 26px;
-  width: 26px;
-  height: 26px;
-  color: hsl(var(--primary));
-  margin-right: 6px;
-} */
-
-/* .rhap_volume-container {
-  display: flex;
-  align-items: center;
-  flex: 0 1 100px;
-  user-select: none;
-  -webkit-user-select: none;
-} */
-
-/* .rhap_volume-bar-area {
-  display: flex;
-  align-items: center;
-  width: 100%;
-  height: 14px;
-  cursor: pointer;
-}
-.rhap_volume-bar-area:focus:not(:focus-visible) {
-  outline: 0;
-}
-
-.rhap_volume-bar {
-  position: relative;
-  width: 100%;
-  height: 4px;
-  background: #dddddd;
-  border-radius: 2px;
-}
-
-.rhap_volume-indicator {
-  position: absolute;
-  width: 12px;
-  height: 12px;
-  margin-left: -6px;
-  left: 0;
-  top: -4px;
-  background: #868686;
-  opacity: 0.9;
-  border-radius: 50px;
-  box-shadow: rgba(134, 134, 134, 0.5) 0 0 3px;
-  cursor: pointer;
-}
-.rhap_volume-indicator:hover {
-  opacity: 0.9;
-}
-
-.rhap_volume-filled {
-  height: 100%;
-  position: absolute;
-  z-index: 2;
-  background-color: #868686;
-  border-radius: 2px;
-} */
-
-/* Utils */
-/* .rhap_button-clear {
-  background-color: transparent;
-  border: none;
-  padding: 0;
-  overflow: hidden;
-  cursor: pointer;
-}
-.rhap_button-clear:hover {
-  opacity: 0.9;
-  transition-duration: 0.2s;
-}
-.rhap_button-clear:active {
-  opacity: 0.95;
-}
-.rhap_button-clear:focus:not(:focus-visible) {
-  outline: 0;
-} */

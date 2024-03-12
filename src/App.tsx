@@ -1,28 +1,31 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { ErrorBoundary } from 'react-error-boundary'
-import { Experience } from '@/Experience'
+import { Experience } from '@/components/Experience'
 import { PlayerProvider } from '@/context/player'
 import { ArtistTracksProvider } from '@/context/artistTracks'
 import { SpotifyProvider } from '@/context/spotify'
 import { AlbumTracksProvider } from '@/context/albumTracks'
+import { AppError } from '@/components/AppError'
 
 const queryClient = new QueryClient()
 
 function App() {
   return (
-    <ErrorBoundary fallback={<p>⚠️ Something went wrong</p>}>
-      <QueryClientProvider client={queryClient}>
+    <div className="text-foreground">
+      <ErrorBoundary fallbackRender={AppError}>
         <PlayerProvider>
           <SpotifyProvider>
-            <ArtistTracksProvider>
-              <AlbumTracksProvider>
-                <Experience />
-              </AlbumTracksProvider>
-            </ArtistTracksProvider>
+            <QueryClientProvider client={queryClient}>
+              <ArtistTracksProvider>
+                <AlbumTracksProvider>
+                  <Experience />
+                </AlbumTracksProvider>
+              </ArtistTracksProvider>
+            </QueryClientProvider>
           </SpotifyProvider>
         </PlayerProvider>
-      </QueryClientProvider>
-    </ErrorBoundary>
+      </ErrorBoundary>
+    </div>
   )
 }
 

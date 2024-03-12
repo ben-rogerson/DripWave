@@ -26,7 +26,8 @@ export const Player = (props: { isLarge?: boolean }) => {
   useEffect(
     () => {
       const isSmallVisible =
-        smallPlayerRef.current?.container.current?.checkVisibility() ?? true
+        // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- The types are wrong here (checkVisibility isn't available in mobile chrome)
+        smallPlayerRef.current?.container.current?.checkVisibility?.() ?? true
       setHasAutoPlay(isSmallVisible)
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps -- Avoid useless dep
@@ -78,15 +79,21 @@ export const Player = (props: { isLarge?: boolean }) => {
     : {
         ref: smallPlayerRef,
         src: selectedTrack.preview_url,
-        customProgressBarSection: [
+        customControlsSection: [
           RHAP_UI.MAIN_CONTROLS,
-          <div key="meta">
-            <div className="truncate font-bold">{selectedTrack.name}</div>
+          <div
+            key={selectedTrack.name}
+            className="flex flex-col justify-center delay-500 duration-500 ease-out animate-in fade-in-0 slide-in-from-bottom-2 fill-mode-backwards"
+          >
+            <div className="font-bold">
+              <div className="truncate">{selectedTrack.name}</div>
+            </div>
             <div className="truncate text-sm text-muted">
               {formatArtists(selectedTrack.artists)}
             </div>
           </div>,
         ],
+        customProgressBarSection: [RHAP_UI.PROGRESS_BAR],
       }
 
   return (

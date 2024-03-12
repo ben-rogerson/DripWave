@@ -27,21 +27,15 @@ export const ArtistTracksProvider = (props: { children: ReactNode }) => {
     refetchOnWindowFocus: false,
   })
 
-  const { data, isPlaceholderData, isFetching, isLoading, error } =
-    useQueryResult
-
-  const tracks = data?.tracks ?? []
-  const artist = data?.artist
-
   return (
     <ArtistTracksContext.Provider
       value={{
-        tracks,
-        artist,
-        isPlaceholderData,
-        isFetching,
-        isLoading,
-        error,
+        tracks: useQueryResult.data?.tracks ?? [],
+        artist: useQueryResult.data?.artist,
+        isPlaceholderData: useQueryResult.isPlaceholderData,
+        isFetching: useQueryResult.isFetching,
+        isLoading: useQueryResult.isLoading,
+        error: useQueryResult.error,
       }}
     >
       {props.children}
@@ -49,10 +43,13 @@ export const ArtistTracksProvider = (props: { children: ReactNode }) => {
   )
 }
 
+export const ArtistTracksContext =
+  createContext<ArtistTracksContextType | null>(null)
+
 const fetchArtists = async (query: string, sdk?: SpotifyApi) => {
   if (!query || !sdk) return {}
 
-  const res = await sdk.search(
+  const results = await sdk.search(
     query,
     ['artist'],
     MARKET_AU,
@@ -61,14 +58,14 @@ const fetchArtists = async (query: string, sdk?: SpotifyApi) => {
     5
   )
 
-  if (res.artists.items.length === 0) return {}
+  // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- We need to check for null
+  if (!results) throw new Error('No response from the Spotify API')
 
-  const artist = res.artists.items[0]
+  if (results.artists.items.length === 0) return {}
+
+  const artist = results.artists.items[0]
 
   const artistTopTracks = await sdk.artists.topTracks(artist.id, MARKET_AU)
 
   return { artist, tracks: artistTopTracks.tracks }
 }
-
-export const ArtistTracksContext =
-  createContext<ArtistTracksContextType | null>(null)

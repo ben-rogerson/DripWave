@@ -1,46 +1,64 @@
-import { memo, useEffect, useState } from 'react'
+import { memo, useEffect, useRef, useState } from 'react'
 import { useSearch } from 'wouter'
-import { useSetSearchParam } from '@/hooks/useSetSearchParam'
-import { cn } from '@/utils/cn'
-import { titleCase } from '@/utils/titleCase'
-import { IconDisc, IconSearch } from '@/components/Icons'
 import { PARAM_SEARCH } from '@/constants'
+import { useSetSearchParam } from '@/hooks/useSetSearchParam'
+import { IconCross, IconDisc, IconSearch } from '@/components/Icons'
 import { useArtistTracks } from '@/hooks/useArtistTracks'
+import { cn } from '@/utils/cn'
 
 export const SearchView = () => {
   const { isFetching } = useArtistTracks()
   const defaultValue = new URLSearchParams(useSearch()).get(PARAM_SEARCH) ?? ''
   const [value, setValue] = useState(defaultValue)
   const setSearchParam = useSetSearchParam()
+  const inputRef = useRef<HTMLInputElement>(null)
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const currentValue = e.currentTarget.value
-    setSearchParam(currentValue.trim().toLowerCase())
-    setValue(currentValue)
+  const handleChange = (newValue: string) => {
+    setSearchParam(newValue)
+    setValue(newValue)
   }
 
   // Update the input value if the search param changes
   useEffect(() => {
-    if (value === defaultValue) return
-    if (defaultValue === '') return
-    if (value !== '') return
-    // TODO: Fix this
-    setValue(titleCase(defaultValue))
-  }, [value, defaultValue])
+    setValue(defaultValue)
+  }, [defaultValue])
 
   return (
     <div className="relative @container/search">
-      <Indicator inProgress={isFetching} />
-      <input
-        type="text"
-        className="h-full w-full bg-transparent py-4 pl-8 text-lg caret-primary outline-none @xs/search:pl-[2.15rem] @xs/search:text-xl @sm/search:text-2xl"
-        placeholder="Search Artists&hellip;"
-        // Controlled input so we can update it when the search param changes.
-        // This allows links that trigger a search to work.
-        value={value}
-        onChange={handleChange}
-        spellCheck="false"
-      />
+      <ResultBounceHider />
+      <div className="flex">
+        <Indicator inProgress={isFetching} />
+        <input
+          ref={inputRef}
+          type="search"
+          className="peer h-full w-full bg-transparent py-4 pl-8 text-lg text-foreground caret-primary outline-none focus-within:outline-none @xs/search:pl-[2.15rem] @xs/search:text-xl @sm/search:text-2xl"
+          placeholder="Search Artists&hellip;"
+          // Controlled input so we can update it when the search param changes.
+          // This allows links that trigger a search to work.
+          value={value}
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+            handleChange(e.currentTarget.value)
+          }}
+          spellCheck="false"
+        />
+        <button
+          type="button"
+          onClick={() => {
+            handleChange('')
+            inputRef.current?.focus()
+          }}
+          className="group/clear block p-2"
+        >
+          <IconCross
+            className={cn(
+              'text-muted duration-500 animate-in fade-in-0 group-hover/clear:text-primary peer-focus:opacity-100',
+              value
+                ? 'opacity-100'
+                : 'animate-out fade-out-0 fill-mode-forwards'
+            )}
+          />
+        </button>
+      </div>
     </div>
   )
 }
@@ -53,13 +71,13 @@ const Indicator = (props: { inProgress: boolean }) => {
       <IconSearch
         className={cn(
           'absolute h-full text-2xl transition-all delay-75 duration-700 ease-out',
-          { 'scale-50 opacity-0': props.inProgress }
+          props.inProgress && 'scale-50 opacity-0'
         )}
       />
       <div
         className={cn(
           'ease absolute inline-block h-full scale-100 text-primary transition-all delay-75 duration-700',
-          { 'scale-150 opacity-0': !props.inProgress }
+          !props.inProgress && 'scale-150 opacity-0'
         )}
       >
         <IconDisc className="h-full animate-spin" />
@@ -67,3 +85,12 @@ const Indicator = (props: { inProgress: boolean }) => {
     </div>
   )
 }
+
+/**
+ * When results are scrolled on mobile, the menu bar (while resizing) shows
+ * the results in the background at the top. This panel prevents them from
+ * being shown.
+ */
+const ResultBounceHider = () => (
+  <div className="pointer-events-none absolute inset-0 -top-full h-full bg-background" />
+)
