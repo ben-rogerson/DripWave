@@ -33,11 +33,7 @@ export const TrackDetail = () => {
         />
       </div>
       <div className="sticky top-0 z-10 overflow-hidden bg-background shadow-2xl shadow-background">
-        <Player
-          // Re-render image with key for fade-in effect
-          key={selectedTrack.id}
-          isLarge
-        />
+        <Player isLarge />
       </div>
       <div className="sticky top-0 grid gap-10 @container/detail">
         <div className="rounded-t-2xl bg-gradient-to-t from-transparent to-accent @md/detail:py-5 @lg/detail:mt-2 @lg/detail:gap-6">
