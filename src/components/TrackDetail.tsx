@@ -23,7 +23,7 @@ export const TrackDetail = () => {
 
   return (
     <div className="grid min-h-[100dvh] grid-rows-[auto_auto_minmax(0,1fr)] p-6 lg:pr-16 xl:p-10">
-      <div key="img" className="w-[35%] max-w-[20rem] shrink-0">
+      <figure className="w-[35%] max-w-[20rem] shrink-0">
         <TrackImage
           // Re-render image with key for fade-in effect
           key={selectedTrack.album.id}
@@ -31,7 +31,7 @@ export const TrackDetail = () => {
           title={selectedTrack.name}
           {...selectedTrack.album.images[0]}
         />
-      </div>
+      </figure>
       <div className="sticky top-0 z-10 overflow-hidden bg-background shadow-2xl shadow-background">
         <Player isLarge />
       </div>

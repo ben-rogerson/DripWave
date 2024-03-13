@@ -45,6 +45,7 @@ export const SearchBox = () => {
           spellCheck="false"
         />
         <button
+          aria-label="Clear search"
           type="button"
           onClick={() => {
             handleChange('')

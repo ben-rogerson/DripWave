@@ -66,7 +66,7 @@ export const ArtistSearch = () => {
           </Box>
         )}
         {artist && (
-          <div
+          <h2
             className={cn(
               'text-balance px-5 pb-1 leading-snug text-muted @sm/side:pb-2 @sm/side:text-lg',
               'ease-out animate-in fade-in-0 fill-mode-backwards'
@@ -74,7 +74,7 @@ export const ArtistSearch = () => {
           >
             Top tracks from{' '}
             <span className="text-foreground">{artist.name}</span>
-          </div>
+          </h2>
         )}
         {tracks.length > 0 && (
           <div

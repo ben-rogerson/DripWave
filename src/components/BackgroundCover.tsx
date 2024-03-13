@@ -12,11 +12,11 @@ export const BackgroundCover = () => {
   return (
     <div
       className="pointer-events-none fixed left-0 top-0 z-50 grid h-full w-full place-content-center opacity-15 mix-blend-screen"
+      aria-hidden
       key={selectedTrack.album.id}
     >
       <TrackImage
         title={selectedTrack.album.name}
-        aria-hidden
         className="min-h-[100dvh] scale-[110%] rounded-none blur-md sm:scale-[140%] sm:blur-xl"
         {...selectedTrack.album.images[0]}
       />

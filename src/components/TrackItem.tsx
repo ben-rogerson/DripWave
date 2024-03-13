@@ -38,7 +38,7 @@ export const TrackItem = (props: {
     id={`track-${props.id}`}
   >
     <Layout
-      className="py-2 pl-1 pr-5 @md/trackItem:py-3"
+      className="py-2 pl-1 pr-5 @sm/trackItem:py-2.5"
       indicator={
         <Indicator
           showPlaying={props.isPlaying && props.isSelected}
@@ -51,28 +51,32 @@ export const TrackItem = (props: {
       meta={
         <div className="flex items-center justify-between gap-2">
           <div className="w-full overflow-hidden">
-            <div
+            <h3
               className={cn(
                 'truncate font-bold !leading-snug @sm/trackItem:text-lg @xl/trackItem:text-xl',
                 !props.isSelected && 'text-foreground'
               )}
             >
               {props.title}
-            </div>
-            <div className="truncate  @sm/trackItem:text-lg">
+            </h3>
+            <div className="truncate !leading-snug @sm/trackItem:text-lg">
+              <span className="sr-only">By </span>
               {props.artists}
             </div>
             {props.album && (
-              <div className="flex items-center gap-1.5 text-xs uppercase tracking-wide text-muted/50 @sm/trackItem:text-sm @md/trackItem:mt-1">
+              <div className="flex items-center gap-1.5 text-xs uppercase tracking-wide text-muted/50 @sm/trackItem:mt-0.5 @sm/trackItem:text-sm">
                 {props.releaseType === 'single' &&
                 props.album === props.title ? (
                   <span className="italic">Single</span>
                 ) : (
                   <span className="max-w-[calc(100%-6ch)] truncate">
+                    <span className="sr-only">Album </span>
                     {props.album}
                   </span>
                 )}
-                <span className="text-muted/50">&middot;</span>
+                <span className="text-muted/50" aria-hidden>
+                  &middot;
+                </span>
                 <span>{props.albumYear}</span>
               </div>
             )}
@@ -83,6 +87,7 @@ export const TrackItem = (props: {
               onClick={e => {
                 e.stopPropagation() // Avoid triggering onSelect
               }}
+              aria-label="This is a top track"
               className="group/top relative cursor-help px-3 text-xl"
             >
               <div className="pointer-events-none absolute right-full -mr-1 -mt-0.5 whitespace-nowrap rounded bg-background/80 px-2 py-1 text-sm text-foreground opacity-0 transition-opacity group-hover/top:opacity-100 group-focus/top:opacity-100">
@@ -153,7 +158,7 @@ const Layout = (props: {
   meta: ReactNode
   className: string
 }) => (
-  <div
+  <article
     className={cn(
       'grid grid-cols-[minmax(0,40px)_repeat(9,_minmax(0,_1fr))] items-center @sm/trackItem:grid-cols-[minmax(0,50px)_repeat(9,_minmax(0,_1fr))] @lg/trackItem:grid-cols-[minmax(0,80px)_repeat(9,_minmax(0,_1fr))]',
       props.className
@@ -161,10 +166,10 @@ const Layout = (props: {
   >
     <div>{props.indicator}</div>
     {props.image && (
-      <div className="relative col-span-2 pr-4">{props.image}</div>
+      <figure className="relative col-span-2 pr-4">{props.image}</figure>
     )}
     <div className={props.image ? 'col-span-7' : 'col-span-9'}>
       {props.meta}
     </div>
-  </div>
+  </article>
 )
