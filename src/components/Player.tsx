@@ -1,4 +1,4 @@
-import { useEffect, useState, createRef } from 'react'
+import { useEffect, createRef } from 'react'
 import AudioPlayer, { RHAP_UI } from 'react-h5-audio-player'
 import { formatArtists } from '@/utils/formatArtists'
 import { usePlayer } from '@/hooks/usePlayer'
@@ -8,7 +8,6 @@ import { usePlayer } from '@/hooks/usePlayer'
  */
 export const Player = (props: { isLarge?: boolean }) => {
   const { smallPlayerRef, selectedTrack, setPlayingTrackId } = usePlayer()
-  const [hasAutoPlay, setHasAutoPlay] = useState(true)
   const largePlayerRef = createRef<AudioPlayer>()
 
   // Share audio between players by setting the same audio ref
@@ -29,26 +28,15 @@ export const Player = (props: { isLarge?: boolean }) => {
     () => {
       const isSmallVisible =
         (smallPlayerRef.current?.container.current?.clientHeight || 0) > 0
-      setHasAutoPlay(isSmallVisible)
+      if (isSmallVisible) return
+
+      smallPlayerRef.current?.audio.current?.pause()
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps -- Avoid smallPlayerRef dep
     [selectedTrack?.id]
   )
 
-  useEffect(
-    () => {
-      if (hasAutoPlay) return
-      /**
-       * GOTCHA: Setting autoplay attributes on <AudioPlayer /> is
-       * buggy so opted to manually pause the audio instead.
-       */
-      smallPlayerRef.current?.audio.current?.pause()
-    },
-    // eslint-disable-next-line react-hooks/exhaustive-deps -- Avoid smallPlayerRef dep
-    [hasAutoPlay]
-  )
-
-  const handlePlay = () => {
+  const handlePlaying = () => {
     if (!selectedTrack) return // Guard prevents undefined selectedTrack
     setPlayingTrackId(selectedTrack.id)
   }
@@ -115,10 +103,11 @@ export const Player = (props: { isLarge?: boolean }) => {
 
   return (
     <AudioPlayer
+      autoPlay
       customAdditionalControls={[]} // Remove loop button
       customVolumeControls={[]} // Remove volume controls
       showJumpControls={false}
-      onPlaying={handlePlay}
+      onPlaying={handlePlaying}
       onPause={handleClear}
       onEnded={handleClear}
       onAbort={handleClear}
