@@ -6,5 +6,6 @@ export const useAlbumTracks = () => {
   if (!context) {
     throw new Error('useAlbumTracks must be used within a AlbumTracksProvider')
   }
+
   return context
 }

@@ -3,6 +3,9 @@ import AudioPlayer, { RHAP_UI } from 'react-h5-audio-player'
 import { formatArtists } from '@/utils/formatArtists'
 import { usePlayer } from '@/hooks/usePlayer'
 
+/**
+ * Audio player for the Spotify `preview_url`.
+ */
 export const Player = (props: { isLarge?: boolean }) => {
   const { smallPlayerRef, selectedTrack, setPlayingTrackId } = usePlayer()
   const [hasAutoPlay, setHasAutoPlay] = useState(true)

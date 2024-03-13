@@ -8,5 +8,6 @@ export const useArtistTracks = () => {
       'useArtistTracks must be used within a ArtistTracksProvider'
     )
   }
+
   return context
 }

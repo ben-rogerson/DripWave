@@ -21,21 +21,35 @@
   @apply border-border;
 }
 
-html,
-.overflow-y-scroll {
-  transition: scrollbar-color 0.75s ease-in-out;
-  scrollbar-color: hsl(var(--accent)) transparent;
-  scrollbar-width: thin;
+/**
+  * Styled scroll bars.
+  * Uses non-standard `::-webkit` as `scrollbar-color` isn't supported in Safari yet.
+  */
+::-webkit-scrollbar {
+  width: 5px;
+  background-color: transparent;
 }
-
-html,
-.overflow-y-scroll:hover {
-  scrollbar-color: hsl(var(--border)) transparent;
+::-webkit-scrollbar-thumb {
+  background: hsl(var(--border));
 }
 
 body {
-  @apply min-h-[100dvh] select-none overflow-y-scroll bg-background text-foreground;
+  @apply min-h-[100dvh] cursor-default select-none overflow-y-scroll bg-background text-foreground;
   font-family: LilGrotesk, sans-serif;
+}
+
+#root {
+  @apply min-h-inherit;
+}
+
+input[type='search']::-webkit-search-cancel-button {
+  /* Hide the cancel button as we use our own reset button
+  for better cross-browser support. */
+  @apply hidden;
+}
+
+::selection {
+  @apply bg-primary text-background;
 }
 
 :focus-visible {
@@ -43,8 +57,8 @@ body {
   outline-offset: -2px;
 }
 
-#root {
-  @apply min-h-inherit;
+svg {
+  @apply h-[1em] w-[1em];
 }
 
 @font-face {
@@ -61,20 +75,6 @@ body {
   font-style: normal;
   font-weight: 700;
   font-display: swap;
-}
-
-input[type='search']::-webkit-search-cancel-button {
-  /* Hide the cancel button as we use our own reset button
-  for better cross-browser support. */
-  @apply hidden;
-}
-
-svg {
-  @apply h-[1em] w-[1em];
-}
-
-::selection {
-  @apply bg-primary text-background;
 }
 
 /* Audio player */

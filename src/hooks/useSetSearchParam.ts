@@ -1,6 +1,10 @@
 import { PARAM_SEARCH } from '@/constants'
 import { useLocation, useSearch } from 'wouter'
 
+/**
+ * Set the search param in the URL.
+ * @returns Function to set the search param.
+ */
 export const useSetSearchParam = () => {
   const [location, setLocation] = useLocation()
   const params = new URLSearchParams(useSearch())

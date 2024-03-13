@@ -6,5 +6,6 @@ export const usePlayer = () => {
   if (!context) {
     throw new Error('usePlayer must be used within a PlayerProvider')
   }
+
   return context
 }

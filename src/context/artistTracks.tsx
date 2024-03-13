@@ -1,10 +1,10 @@
-import { createContext, type ReactNode } from 'react'
-import type { Artist, Track } from '@spotify/web-api-ts-sdk'
-import { type SpotifyApi } from '@spotify/web-api-ts-sdk'
+import { createContext } from 'react'
 import { keepPreviousData, useQuery } from '@tanstack/react-query'
-import { MARKET_AU } from '@/constants'
-import { useSearchQuery } from './useSearchQuery'
+import { useSearchQuery } from '@/context/useSearchQuery'
 import { useSpotify } from '@/hooks/useSpotify'
+import { MARKET_AU } from '@/constants'
+import type { ReactNode } from 'react'
+import type { SpotifyApi, Artist, Track } from '@spotify/web-api-ts-sdk'
 
 interface ArtistTracksContextType {
   tracks: Track[]

@@ -6,5 +6,6 @@ export const useSpotify = () => {
   if (!context) {
     throw new Error('useSpotify must be used within a SpotifyProvider')
   }
+
   return context
 }

@@ -1,11 +1,6 @@
-import {
-  useEffect,
-  useRef,
-  useState,
-  createContext,
-  type ReactNode,
-} from 'react'
+import { useEffect, useRef, useState, createContext } from 'react'
 import { SpotifyApi } from '@spotify/web-api-ts-sdk'
+import type { ReactNode } from 'react'
 import type { SdkOptions } from '@spotify/web-api-ts-sdk'
 
 interface SpotifyContextType {
@@ -18,8 +13,6 @@ export const SpotifyProvider = (props: { children: ReactNode }) => {
     String(import.meta.env.VITE_SPOTIFY_SECRET_ID),
     [] // Scopes are not required for this app
   )
-
-  // TODO: Validate meta.env
 
   return (
     <SpotifyContext.Provider value={{ sdk }}>

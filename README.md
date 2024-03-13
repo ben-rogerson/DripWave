@@ -31,6 +31,10 @@ Or to start the development server, run:
 npm run dev
 ```
 
+## Improvements
+
+[] Validate env variables
+
 ## Technologies
 
 - [Vite](https://vitejs.dev/) - Frontend tooling

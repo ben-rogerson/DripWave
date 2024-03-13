@@ -1,9 +1,12 @@
-import type { Track } from '@spotify/web-api-ts-sdk'
-import { type ReactNode } from 'react'
 import { cn } from '@/utils/cn'
 import { IconAudio, IconPause, IconPlay, IconTop } from '@/components/Icons'
 import { TrackImage } from '@/components/TrackImage'
+import type { ReactNode } from 'react'
+import type { Track } from '@spotify/web-api-ts-sdk'
 
+/**
+ * A single track for display in a track list.
+ */
 export const TrackItem = (props: {
   id?: string
   image?: Track['album']['images'][0]
@@ -80,7 +83,7 @@ export const TrackItem = (props: {
               onClick={e => {
                 e.stopPropagation() // Avoid triggering onSelect
               }}
-              className="group/top relative px-3 text-xl"
+              className="group/top relative cursor-help px-3 text-xl"
             >
               <div className="pointer-events-none absolute right-full -mr-1 -mt-0.5 whitespace-nowrap rounded bg-background/80 px-2 py-1 text-sm text-foreground opacity-0 transition-opacity group-hover/top:opacity-100 group-focus/top:opacity-100">
                 Top track
@@ -103,47 +106,45 @@ const Indicator = (props: {
   showPlaying: boolean
   isSelected: boolean
   children: ReactNode
-}) => {
-  return (
-    <div className="pointer-events-none relative h-full w-full text-sm @sm/trackItem:text-lg">
-      {props.isSelected && (
-        <div
-          className={cn(
-            'absolute z-10 grid h-full w-full place-content-center',
-            'opacity-0 transition-all duration-500 group-hover:opacity-100',
-            '-rotate-45 scale-75 ease-out group-hover:rotate-0 group-hover:scale-100'
-          )}
-        >
-          {props.showPlaying ? <IconPause /> : <IconPlay />}
-        </div>
-      )}
+}) => (
+  <div className="pointer-events-none relative h-full w-full text-sm @sm/trackItem:text-lg">
+    {props.isSelected && (
       <div
         className={cn(
-          'grid h-inherit w-inherit place-content-center',
-          props.isSelected && 'group-hover:opacity-0'
+          'absolute z-10 grid h-full w-full place-content-center',
+          'opacity-0 transition-all duration-500 group-hover:opacity-100',
+          '-rotate-45 scale-75 ease-out group-hover:rotate-0 group-hover:scale-100'
         )}
       >
-        <div
-          className={cn(
-            'absolute left-0 grid h-inherit w-inherit place-content-center',
-            'transition-opacity duration-500',
-            !props.showPlaying && 'opacity-0'
-          )}
-        >
-          <IconAudio />
-        </div>
-        <div
-          className={cn(
-            'transition-opacity duration-500',
-            props.showPlaying && 'text-primary opacity-0'
-          )}
-        >
-          {props.children}
-        </div>
+        {props.showPlaying ? <IconPause /> : <IconPlay />}
+      </div>
+    )}
+    <div
+      className={cn(
+        'grid h-inherit w-inherit place-content-center',
+        props.isSelected && 'group-hover:opacity-0'
+      )}
+    >
+      <div
+        className={cn(
+          'absolute left-0 grid h-inherit w-inherit place-content-center',
+          'transition-opacity duration-500',
+          !props.showPlaying && 'opacity-0'
+        )}
+      >
+        <IconAudio />
+      </div>
+      <div
+        className={cn(
+          'transition-opacity duration-500',
+          props.showPlaying && 'text-primary opacity-0'
+        )}
+      >
+        {props.children}
       </div>
     </div>
-  )
-}
+  </div>
+)
 
 const Layout = (props: {
   selectedTrack?: Track
@@ -151,21 +152,19 @@ const Layout = (props: {
   image: ReactNode
   meta: ReactNode
   className: string
-}) => {
-  return (
-    <div
-      className={cn(
-        'grid grid-cols-[minmax(0,40px)_repeat(9,_minmax(0,_1fr))] items-center @sm/trackItem:grid-cols-[minmax(0,50px)_repeat(9,_minmax(0,_1fr))] @lg/trackItem:grid-cols-[minmax(0,80px)_repeat(9,_minmax(0,_1fr))]',
-        props.className
-      )}
-    >
-      <div>{props.indicator}</div>
-      {props.image && (
-        <div className="relative col-span-2 pr-4">{props.image}</div>
-      )}
-      <div className={props.image ? 'col-span-7' : 'col-span-9'}>
-        {props.meta}
-      </div>
+}) => (
+  <div
+    className={cn(
+      'grid grid-cols-[minmax(0,40px)_repeat(9,_minmax(0,_1fr))] items-center @sm/trackItem:grid-cols-[minmax(0,50px)_repeat(9,_minmax(0,_1fr))] @lg/trackItem:grid-cols-[minmax(0,80px)_repeat(9,_minmax(0,_1fr))]',
+      props.className
+    )}
+  >
+    <div>{props.indicator}</div>
+    {props.image && (
+      <div className="relative col-span-2 pr-4">{props.image}</div>
+    )}
+    <div className={props.image ? 'col-span-7' : 'col-span-9'}>
+      {props.meta}
     </div>
-  )
-}
+  </div>
+)

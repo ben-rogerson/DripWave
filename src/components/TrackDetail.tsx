@@ -1,5 +1,4 @@
-import type { AriaRole } from 'react'
-import { memo, type ReactNode } from 'react'
+import { memo } from 'react'
 import { TrackImage } from '@/components/TrackImage'
 import { TrackItem } from '@/components/TrackItem'
 import { Player } from '@/components/Player'
@@ -9,18 +8,12 @@ import { useAlbumTracks } from '@/hooks/useAlbumTracks'
 import { formatArtists } from '@/utils/formatArtists'
 import { IconDisc, IconDrip } from '@/components/Icons'
 import { cn } from '@/utils/cn'
+import type { AriaRole, ReactNode } from 'react'
 import type { Track } from '@spotify/web-api-ts-sdk'
 
-const Empty = memo(function EmptyMemo() {
-  return (
-    <div className="grid min-h-[300px] place-content-center">
-      <div>
-        <IconDrip className="justify-self-center text-[70px] text-muted/35" />
-      </div>
-    </div>
-  )
-})
-
+/**
+ * Main view for the track detail, including the album tracks.
+ */
 export const TrackDetail = () => {
   const { selectedTrack, playingTrackId, setSelectedTrack } = usePlayer()
   const { albumTracks, copyright, isLoading, error } = useAlbumTracks()
@@ -119,6 +112,16 @@ export const TrackDetail = () => {
     </div>
   )
 }
+
+const Empty = memo(function EmptyMemo() {
+  return (
+    <div className="grid min-h-[300px] place-content-center">
+      <div>
+        <IconDrip className="justify-self-center text-[70px] text-muted/35" />
+      </div>
+    </div>
+  )
+})
 
 const Box = (props: {
   children: ReactNode

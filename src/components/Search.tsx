@@ -6,7 +6,10 @@ import { IconCross, IconDisc, IconSearch } from '@/components/Icons'
 import { useArtistTracks } from '@/hooks/useArtistTracks'
 import { cn } from '@/utils/cn'
 
-export const SearchView = () => {
+/**
+ * Search input box for artists.
+ */
+export const SearchBox = () => {
   const { isFetching } = useArtistTracks()
   const defaultValue = new URLSearchParams(useSearch()).get(PARAM_SEARCH) ?? ''
   const [value, setValue] = useState(defaultValue)
@@ -63,28 +66,26 @@ export const SearchView = () => {
   )
 }
 
-export const Search = memo(SearchView)
+export const Search = memo(SearchBox)
 
-const Indicator = (props: { inProgress: boolean }) => {
-  return (
-    <div className="pointer-events-none absolute h-full text-2xl text-muted">
-      <IconSearch
-        className={cn(
-          'absolute h-full text-2xl transition-all delay-75 duration-700 ease-out',
-          props.inProgress && 'scale-50 opacity-0'
-        )}
-      />
-      <div
-        className={cn(
-          'ease absolute inline-block h-full scale-100 text-primary transition-all delay-75 duration-700',
-          !props.inProgress && 'scale-150 opacity-0'
-        )}
-      >
-        <IconDisc className="h-full animate-spin" />
-      </div>
+const Indicator = (props: { inProgress: boolean }) => (
+  <div className="pointer-events-none absolute h-full text-2xl text-muted">
+    <IconSearch
+      className={cn(
+        'absolute h-full text-2xl transition-all delay-75 duration-700 ease-out',
+        props.inProgress && 'scale-50 opacity-0'
+      )}
+    />
+    <div
+      className={cn(
+        'ease absolute inline-block h-full scale-100 text-primary transition-all delay-75 duration-700',
+        !props.inProgress && 'scale-150 opacity-0'
+      )}
+    >
+      <IconDisc className="h-full animate-spin" />
     </div>
-  )
-}
+  </div>
+)
 
 /**
  * When results are scrolled on mobile, the menu bar (while resizing) shows

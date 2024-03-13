@@ -1,5 +1,8 @@
 import type { SVGProps } from 'react'
 
+/**
+ * Common svg icon wrapper.
+ */
 const Icon = (props: SVGProps<SVGSVGElement>) => (
   <svg
     fill="none"

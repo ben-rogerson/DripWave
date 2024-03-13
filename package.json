@@ -3,9 +3,6 @@
   "version": "0.0.0",
   "type": "module",
   "private": true,
-  "engines": {
-    "node": ">=18.x"
-  },
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
@@ -15,24 +12,19 @@
   "dependencies": {
     "@spotify/web-api-ts-sdk": "^1.2.0",
     "@tanstack/react-query": "^5.24.8",
-    "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.0",
     "loadable-image": "^3.1.1",
-    "lodash.debounce": "^4.0.8",
     "million": "^3.0.4",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-error-boundary": "^4.0.13",
     "react-h5-audio-player": "^3.9.1",
     "tailwind-merge": "^2.2.1",
-    "wouter": "^3.0.1",
-    "zod": "^3.22.4"
+    "wouter": "^3.0.1"
   },
   "devDependencies": {
     "@tailwindcss/container-queries": "^0.1.1",
     "@tanstack/eslint-plugin-query": "^5.20.1",
-    "@types/lodash.debounce": "^4.0.9",
-    "@types/node": "^20.11.24",
     "@types/react": "^18.2.56",
     "@types/react-dom": "^18.2.19",
     "@typescript-eslint/eslint-plugin": "^7.0.2",

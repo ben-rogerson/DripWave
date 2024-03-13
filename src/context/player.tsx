@@ -1,5 +1,5 @@
-import { type Track } from '@spotify/web-api-ts-sdk'
 import { createContext, useState, createRef, useCallback } from 'react'
+import type { Track } from '@spotify/web-api-ts-sdk'
 import type { ReactNode } from 'react'
 import type AudioPlayer from 'react-h5-audio-player'
 

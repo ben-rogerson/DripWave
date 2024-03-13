@@ -33,8 +33,6 @@
   },
   "include": [
     "src",
-    "backup/machine.tsx",
-    "backup/App.machine.tsx"
   ],
   "exclude": [
     "node_modules"

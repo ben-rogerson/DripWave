@@ -2,13 +2,18 @@ import { Search } from '@/components/Search'
 import { ArtistLink } from '@/components/ArtistLink'
 import { TrackItem } from '@/components/TrackItem'
 import { Player } from '@/components/Player'
-import { cn } from '@/utils/cn'
 import { formatArtists } from '@/utils/formatArtists'
-import { usePlayer } from '@/hooks/usePlayer'
-import { useSearchQuery } from '@/context/useSearchQuery'
 import { useArtistTracks } from '@/hooks/useArtistTracks'
+import { useSearchQuery } from '@/context/useSearchQuery'
+import { usePlayer } from '@/hooks/usePlayer'
+import { cn } from '@/utils/cn'
 import type { AriaRole, ReactNode } from 'react'
 
+/**
+ * Main view for the artist search.
+ * On mobile: Entire mobile view.
+ * On desktop: Left sidebar view.
+ */
 export const ArtistSearch = () => {
   const query = useSearchQuery()
   const { artist, tracks, isFetching, isPlaceholderData, error } =
@@ -22,17 +27,17 @@ export const ArtistSearch = () => {
       </div>
       <div>
         {Boolean(error) && (
-          <Message className="text-lg font-bold text-destructive" role="alert">
+          <Box className="text-lg font-bold text-destructive" role="alert">
             <div className="animate-pulse">{String(error)}</div>
-          </Message>
+          </Box>
         )}
         {Boolean(tracks.length === 0 && query && !isFetching && !error) && (
-          <Message className="text-lg font-bold text-destructive" role="alert">
+          <Box className="text-lg font-bold text-destructive" role="alert">
             <div className="animate-pulse">No artists matched your search</div>
-          </Message>
+          </Box>
         )}
         {tracks.length === 0 && (
-          <Message
+          <Box
             className={cn(
               'grid gap-3',
               'delay-100 duration-1000 animate-in fade-in-0 fill-mode-backwards'
@@ -58,12 +63,12 @@ export const ArtistSearch = () => {
                 <ArtistLink>Aether</ArtistLink>
               </li>
             </ul>
-          </Message>
+          </Box>
         )}
         {artist && (
           <div
             className={cn(
-              'px-5 pb-1 text-sm text-muted @sm/side:pb-2 @sm/side:text-lg',
+              'text-balance px-5 pb-1 leading-snug text-muted @sm/side:pb-2 @sm/side:text-lg',
               'ease-out animate-in fade-in-0 fill-mode-backwards'
             )}
           >
@@ -121,25 +126,23 @@ export const ArtistSearch = () => {
   )
 }
 
-const Message = (props: {
+const Box = (props: {
   children: ReactNode
   className?: string
   role?: AriaRole
-}) => {
-  return (
+}) => (
+  <div
+    className={cn(
+      'relative mx-5 px-5 pb-6 pt-5 hover:[&_a]:text-primary focus:[&_a]:text-primary',
+      props.className
+    )}
+  >
     <div
       className={cn(
-        'relative mx-5 px-5 pb-6 pt-5 hover:[&_a]:text-primary focus:[&_a]:text-primary',
-        props.className
+        'pointer-events-none absolute inset-0 rounded-md rounded-t-2xl bg-gradient-to-t from-transparent to-muted/15',
+        'delay-300 duration-1000 ease-out animate-in fade-in-0 fill-mode-backwards'
       )}
-    >
-      <div
-        className={cn(
-          'pointer-events-none absolute inset-0 rounded-md rounded-t-2xl bg-gradient-to-t from-transparent to-muted/15',
-          'delay-300 duration-1000 ease-out animate-in fade-in-0 fill-mode-backwards'
-        )}
-      />
-      {props.children}
-    </div>
-  )
-}
+    />
+    {props.children}
+  </div>
+)
