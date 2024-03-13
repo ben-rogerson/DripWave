@@ -1,18 +1,18 @@
 # DripWave
 
-<p><a href="https://dripwave.vercel.app/" target="_blank"><img src="./.github/preview-logo.png" width="400" alt="DripWave Logo" /></a></p>
+<p><a href="https://dripwave.vercel.app/" target="_blank"><img src="./.github/preview-logo.png" width="300" alt="DripWave Logo" /></a></p>
 
 A web app to search for artists and preview their music.
+
+<p>
+    <a href="https://dripwave.vercel.app/" target="_blank"><img src="./.github/preview-large.png" alt="Desktop" height="400" /></a>
+    <span></span>
+    <a href="https://dripwave.vercel.app/" target="_blank"><img src="./.github/preview-small.png" alt="Mobile" height="400" /></a>
+</p>
 
 Preview at: 💧 [dripwave.vercel.app](https://dripwave.vercel.app/)
 
 Early state chart: 📊 [Early DripWave planning @ stately.ai](https://stately.ai/registry/editor/71914a7e-b08d-4032-809f-e9e0acb1892e?mode=Design&machineId=1efcb27a-d19b-42b2-a2ad-b464c6903b08)
-
-<p>
-    <a href="https://dripwave.vercel.app/" target="_blank"><img src="./.github/preview-large.png" alt="Desktop" height="500" /></a>
-    <span></span>
-    <a href="https://dripwave.vercel.app/" target="_blank"><img src="./.github/preview-small.png" alt="Mobile" height="500" /></a>
-</p>
 
 ## Run this project locally
 
@@ -60,20 +60,20 @@ Also tested in mobile Chrome and Safari.
 
 ## Supported features
 
-- Play/Pause support (no forward/backward).
-- Track seeking support.
-- Track playing indicator shown.
-- Playback during new search (no interruption).
-- Mobile: Tap a track to _play_ the preview.
-- Desktop: Click a track to _open_ the track detail.
-- Desktop: Double click a track to _play_ the preview.
+- [x] Play/Pause support (no forward/backward).
+- [x] Track seeking support.
+- [x] Track playing indicator shown.
+- [x] Playback during new search (no interruption).
+- [x] Mobile: Tap a track to _play_ the preview.
+- [x] Desktop: Click a track to _open_ the track detail.
+- [x] Desktop: Double click a track to _play_ the preview.
 
 ## Improvements
 
-- [] Validate env variables
-- [] Performance improvements
-- [] Keep selected track after refresh (desktop view)
-- [] Add track forward/backward support
+- [ ] Validate env variables
+- [ ] Performance improvements
+- [ ] Keep selected track after refresh (desktop view)
+- [ ] Add track forward/backward support
 
 ## Technologies
 
