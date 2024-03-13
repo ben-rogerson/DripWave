@@ -91,7 +91,7 @@ svg {
 }
 
 .player-small .rhap_controls-section {
-  @apply flex gap-2.5 overflow-x-hidden;
+  @apply flex gap-2.5 overflow-hidden;
 }
 
 .player-small .rhap_main-controls {
