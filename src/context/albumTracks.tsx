@@ -1,5 +1,4 @@
 import { createContext } from 'react'
-import { useLocation } from 'wouter'
 import { useQuery } from '@tanstack/react-query'
 import { useSpotify } from '@/hooks/useSpotify'
 import { usePlayer } from '@/hooks/usePlayer'
@@ -18,11 +17,8 @@ interface AlbumTracksContextType {
 export const AlbumTracksProvider = (props: { children: ReactNode }) => {
   const { sdk } = useSpotify()
   const { selectedTrack } = usePlayer()
-  // const { tracks } = useArtistTracks()
-  // const [location] = useLocation()
-  const [location] = useLocation()
 
-  const albumId = selectedTrack?.album.id ?? location.split('/')[1]
+  const albumId = selectedTrack?.album.id
 
   const results = useQuery({
     queryKey: ['album', albumId],

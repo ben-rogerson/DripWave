@@ -112,9 +112,7 @@ export const TrackDetail = () => {
 const Empty = memo(function EmptyMemo() {
   return (
     <div className="grid min-h-[300px] place-content-center">
-      <div>
-        <IconDrip className="justify-self-center text-[70px] text-muted/35" />
-      </div>
+      <IconDrip className="justify-self-center text-[70px] text-muted/35" />
     </div>
   )
 })

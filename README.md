@@ -24,7 +24,7 @@ npm install
 
 2. In the project, rename `env.example` to `.env`.
 
-3. [Create a new Spotify app via the dashboard](https://developer.spotify.com/dashboard/create)<br/>- "App name" and "App description" can be anything<br/>- For "Redirect URI" enter `http://localhost:5173/`<br/>- For "Which API/SDKs are you planning to use?", choose `Web API`.
+3. [Create a new Spotify app via the dashboard](https://developer.spotify.com/dashboard/create)<br/>- "App name" and "App description" can be anything<br/>- For "Redirect URI" you can enter `http://localhost:5173/`<br/>- For "Which API/SDKs are you planning to use?", choose `Web API`.
 
 > Note: When trying to add the app, if you see the error: "You need to verify your email address before you can create an app." then [head to the dashboard](https://developer.spotify.com/dashboard) and you’ll see a prompt to start the verification process.
 
@@ -74,6 +74,7 @@ Also tested in mobile Chrome and Safari.
 - [ ] Performance improvements
 - [ ] Keep selected track after refresh (desktop view)
 - [ ] Add track forward/backward support
+- [ ] Avoid fetching artist detail column on mobile
 
 ## Technologies
 
