@@ -49,14 +49,7 @@ export const ArtistTracksContext =
 const fetchArtists = async (query: string, sdk?: SpotifyApi) => {
   if (!query || !sdk) return {}
 
-  const results = await sdk.search(
-    query,
-    ['artist'],
-    MARKET_AU,
-    // To receive the correct artist, the API needs a higher limit
-    // Otherwise it returns an incorrect result.
-    5
-  )
+  const results = await sdk.search(query, ['artist'], MARKET_AU, 1)
 
   // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- We need to check for null
   if (!results) throw new Error('No response from the Spotify API')
