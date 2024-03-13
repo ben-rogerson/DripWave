@@ -26,6 +26,12 @@ export const SearchBox = () => {
     setValue(defaultValue)
   }, [defaultValue])
 
+  // Autofocus input when the page loads
+  useEffect(() => {
+    if (defaultValue) return
+    inputRef.current?.focus()
+  }, [defaultValue])
+
   return (
     <div className="relative @container/search">
       <ResultBounceHider />
