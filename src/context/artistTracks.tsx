@@ -1,6 +1,6 @@
 import { createContext } from 'react'
 import { keepPreviousData, useQuery } from '@tanstack/react-query'
-import { useSearchQuery } from '@/context/useSearchQuery'
+import { useSearchQuery } from '@/hooks/useSearchQuery'
 import { useSpotify } from '@/hooks/useSpotify'
 import { MARKET_AU } from '@/constants'
 import type { ReactNode } from 'react'
