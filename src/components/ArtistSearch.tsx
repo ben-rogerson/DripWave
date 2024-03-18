@@ -1,7 +1,7 @@
 import { Search } from '@/components/Search'
 import { ArtistLink } from '@/components/ArtistLink'
 import { TrackItem } from '@/components/TrackItem'
-import { Player } from '@/components/Player'
+import { PlayerSmall } from '@/components/Player'
 import { formatArtists } from '@/utils/formatArtists'
 import { useArtistTracks } from '@/hooks/useArtistTracks'
 import { useSearchQuery } from '@/hooks/useSearchQuery'
@@ -119,7 +119,7 @@ export const ArtistSearch = () => {
           <div className="pointer-events-none h-3 w-full bg-gradient-to-t from-background to-transparent opacity-50" />
         )}
         <div className="bg-accent">
-          <Player />
+          <PlayerSmall />
         </div>
       </div>
     </>
