@@ -19,14 +19,12 @@ export const PlayerProvider = (props: { children: ReactNode }) => {
   const setSelectedTrackCached = useCallback(
     (track: Track) => {
       if (selectedTrack?.id === track.id) {
-        if (selectedTrack.id === track.id && smallPlayerRef.current) {
-          if (playingTrackId === track.id) {
-            smallPlayerRef.current.audio.current?.pause()
-            return
-          }
-          void smallPlayerRef.current.audio.current?.play()
+        if (!smallPlayerRef.current) return
+        if (playingTrackId === track.id) {
+          smallPlayerRef.current.audio.current?.pause()
           return
         }
+        void smallPlayerRef.current.audio.current?.play()
         return
       }
 

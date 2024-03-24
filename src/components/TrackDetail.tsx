@@ -1,7 +1,7 @@
 import { memo } from 'react'
 import { TrackImage } from '@/components/TrackImage'
 import { TrackItem } from '@/components/TrackItem'
-import { Player } from '@/components/Player'
+import { PlayerLarge } from '@/components/Player'
 import { usePlayer } from '@/hooks/usePlayer'
 import { useArtistTracks } from '@/hooks/useArtistTracks'
 import { useAlbumTracks } from '@/hooks/useAlbumTracks'
@@ -33,7 +33,7 @@ export const TrackDetail = () => {
         />
       </figure>
       <div className="sticky top-0 z-10 overflow-hidden bg-background shadow-2xl shadow-background">
-        <Player isLarge />
+        <PlayerLarge />
       </div>
       <div className="sticky top-0 grid gap-10 @container/detail">
         <div className="rounded-t-2xl bg-gradient-to-t from-transparent to-accent @md/detail:py-5 @lg/detail:mt-2 @lg/detail:gap-6">

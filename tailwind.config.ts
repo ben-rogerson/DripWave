@@ -1,9 +1,21 @@
 import type { Config } from 'tailwindcss'
+import animate from 'tailwindcss-animate'
+import containerQueries from '@tailwindcss/container-queries'
+
+export const screens = {
+  xs: '375px',
+  sm: '640px',
+  md: '768px',
+  lg: '1024px',
+  xl: '1280px',
+  '2xl': '1536px',
+} as const
 
 const config = {
   content: ['./src/**/*.{ts,tsx}'],
   prefix: '',
   theme: {
+    screens,
     colors: {
       foreground: 'hsl(var(--foreground))',
       background: 'hsl(var(--background))',
@@ -18,7 +30,6 @@ const config = {
     },
     extend: {
       zIndex: { behind: '-1' },
-      screens: { xs: '375px' },
       spacing: { inherit: 'inherit' },
       borderRadius: {
         lg: 'var(--radius)',
@@ -31,10 +42,7 @@ const config = {
       },
     },
   },
-  plugins: [
-    require('tailwindcss-animate'),
-    require('@tailwindcss/container-queries'),
-  ],
+  plugins: [animate, containerQueries],
 } satisfies Config
 
 export default config
