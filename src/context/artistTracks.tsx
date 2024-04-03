@@ -1,6 +1,6 @@
 import { createContext } from 'react'
 import { keepPreviousData, useQuery } from '@tanstack/react-query'
-import { useSearchQuery } from '@/hooks/useSearchQuery'
+import { useSearchParam } from '@/hooks/useSearchParam'
 import { useSpotify } from '@/hooks/useSpotify'
 import { MARKET_AU } from '@/constants'
 import type { ReactNode } from 'react'
@@ -17,7 +17,7 @@ interface ArtistTracksContextType {
 
 export const ArtistTracksProvider = (props: { children: ReactNode }) => {
   const { sdk } = useSpotify()
-  const query = useSearchQuery()
+  const query = useSearchParam()
 
   const useQueryResult = useQuery({
     queryKey: ['query', query],
