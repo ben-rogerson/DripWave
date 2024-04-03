@@ -37,7 +37,11 @@ export const PlayerLarge = () => {
       ]}
       customProgressBarSection={[
         <div key="empty" />,
-        selectedTrack.preview_url ? RHAP_UI.MAIN_CONTROLS : <div key="empty" />,
+        selectedTrack.preview_url ? (
+          RHAP_UI.MAIN_CONTROLS
+        ) : (
+          <div key="empty2" />
+        ),
         <div
           key="meta"
           className="ml-4 flex items-center gap-7 overflow-hidden"

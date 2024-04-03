@@ -13,8 +13,8 @@ const queryClient = new QueryClient()
 const App = () => (
   <ErrorBoundary fallbackRender={AppError}>
     <BreakpointProvider>
-      <PlayerProvider>
-        <SpotifyProvider>
+      <SpotifyProvider>
+        <PlayerProvider>
           <QueryClientProvider client={queryClient}>
             <ArtistTracksProvider>
               <AlbumTracksProvider>
@@ -22,8 +22,8 @@ const App = () => (
               </AlbumTracksProvider>
             </ArtistTracksProvider>
           </QueryClientProvider>
-        </SpotifyProvider>
-      </PlayerProvider>
+        </PlayerProvider>
+      </SpotifyProvider>
     </BreakpointProvider>
   </ErrorBoundary>
 )

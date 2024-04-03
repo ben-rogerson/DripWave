@@ -1,17 +1,16 @@
 import { memo, useEffect, useRef, useState } from 'react'
-import { useSearch } from 'wouter'
-import { PARAM_SEARCH } from '@/constants'
 import { useSetSearchParam } from '@/hooks/useSetSearchParam'
 import { IconCross, IconDisc, IconSearch } from '@/components/Icons'
 import { useArtistTracks } from '@/hooks/useArtistTracks'
 import { cn } from '@/utils/cn'
+import { useSearchParam } from '@/hooks/useSearchParam'
 
 /**
  * Search input box for artists.
  */
 export const SearchBox = () => {
   const { isFetching } = useArtistTracks()
-  const defaultValue = new URLSearchParams(useSearch()).get(PARAM_SEARCH) ?? ''
+  const defaultValue = useSearchParam()
   const [value, setValue] = useState(defaultValue)
   const setSearchParam = useSetSearchParam()
   const inputRef = useRef<HTMLInputElement>(null)

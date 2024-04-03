@@ -25,18 +25,21 @@ It is currently deployed on [Vercel](https://vercel.com/).
 - [x] Play/Pause track preview
 - [x] Time seeking track preview
 - [x] Track playing / Top track indicators
-- [x] Playback during new search (no interruption)
+- [x] Playback during new search (no interruptions)
+- [x] Maintain url state (search keywords + selected track)
 - [x] Mobile: Tap a track to play
 - [x] Desktop: Single click a track to open the track detail
 - [x] Desktop: Double click a track to play
 
-## Future improvements
+## Future features
 
-- [ ] Validate env variables
-- [ ] Avoid fetching artist detail column on mobile
-- [ ] Performance improvements (re-rendering)
-- [ ] Restore selected track after refresh
 - [ ] Add next/previous track buttons
+- [ ] Add playlist functionality
+- [ ] Switch to Spotify auth
+- [ ] Add customized track/artist suggestions
+- [ ] Add unit tests for the player
+- [ ] Add E2E tests
+- [ ] Performance improvements (re-rendering)
 
 ## Run this project locally
 

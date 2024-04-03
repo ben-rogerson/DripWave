@@ -4,7 +4,7 @@ import { TrackItem } from '@/components/TrackItem'
 import { PlayerSmall } from '@/components/Player'
 import { formatArtists } from '@/utils/formatArtists'
 import { useArtistTracks } from '@/hooks/useArtistTracks'
-import { useSearchQuery } from '@/hooks/useSearchQuery'
+import { useSearchParam } from '@/hooks/useSearchParam'
 import { usePlayer } from '@/hooks/usePlayer'
 import { cn } from '@/utils/cn'
 import type { AriaRole, ReactNode } from 'react'
@@ -15,7 +15,7 @@ import type { AriaRole, ReactNode } from 'react'
  * On desktop: Left sidebar view.
  */
 export const ArtistSearch = () => {
-  const query = useSearchQuery()
+  const query = useSearchParam()
   const { artist, tracks, isFetching, isPlaceholderData, error } =
     useArtistTracks()
   const { selectedTrack, playingTrackId, setSelectedTrack } = usePlayer()
