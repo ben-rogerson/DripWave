@@ -10,7 +10,7 @@ A web app to search for artists and preview their music.
     <a href="https://dripwave.vercel.app/" target="_blank"><img src="./.github/preview-small.png" alt="Mobile" height="400" /></a>
 </p>
 
-Preview at: 💧 [dripwave.vercel.app](https://dripwave.vercel.app/)
+Check out the app at: 💧 [dripwave.benrogerson.dev](https://dripwave.benrogerson.dev/)
 
 Early state chart: 📊 [Early DripWave planning @ stately.ai](https://stately.ai/registry/editor/71914a7e-b08d-4032-809f-e9e0acb1892e?mode=Design&machineId=1efcb27a-d19b-42b2-a2ad-b464c6903b08)
 
