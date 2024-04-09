@@ -10,7 +10,7 @@ A web app to search for artists and preview their music.
     <a href="https://dripwave.vercel.app/" target="_blank"><img src="./.github/preview-small.png" alt="Mobile" height="400" /></a>
 </p>
 
-Preview at: 💧 [dripwave.vercel.app](https://dripwave.vercel.app/)
+💧 [dripwave.benrogerson.dev](https://dripwave.benrogerson.dev/)
 
 Early state chart: 📊 [Early DripWave planning @ stately.ai](https://stately.ai/registry/editor/71914a7e-b08d-4032-809f-e9e0acb1892e?mode=Design&machineId=1efcb27a-d19b-42b2-a2ad-b464c6903b08)
 
@@ -18,7 +18,7 @@ This SPA was bootstrapped with [Vite](https://vitejs.dev/) using their React + S
 Track data is grabbed from the [Spotify Web API](https://developer.spotify.com/documentation/web-api/) using the [TS Spotify Web API SDK](https://github.com/spotify/spotify-web-api-ts-sdk).
 Data fetching and caching is handled by [TanStack Query](https://tanstack.com/query/v5/).
 The responsive UI uses [CSS container queries](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_containment/Container_queries) and is built with [React](https://reactjs.org/) and [TailwindCSS](https://tailwindcss.com/) with animations from [Tailwind CSS Animate](https://github.com/jamiebuilds/tailwindcss-animate).
-It is currently deployed on [Vercel](https://vercel.com/).
+The app is deployed on [Vercel](https://vercel.com/).
 
 ## Features
 
