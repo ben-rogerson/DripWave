@@ -1,13 +1,13 @@
 # DripWave
 
-<p><a href="https://dripwave.vercel.app/" target="_blank"><img src="./.github/preview-logo.png" width="300" alt="DripWave Logo" /></a></p>
+<p><a href="https://dripwave.benrogerson.dev/" target="_blank"><img src="./.github/preview-logo.png" width="300" alt="DripWave Logo" /></a></p>
 
 A web app to search for artists and preview their music.
 
 <p>
-    <a href="https://dripwave.vercel.app/" target="_blank"><img src="./.github/preview-large.png" alt="Desktop" height="400" /></a>
+    <a href="https://dripwave.benrogerson.dev/" target="_blank"><img src="./.github/preview-large.png" alt="Desktop" height="400" /></a>
     <span></span>
-    <a href="https://dripwave.vercel.app/" target="_blank"><img src="./.github/preview-small.png" alt="Mobile" height="400" /></a>
+    <a href="https://dripwave.benrogerson.dev/" target="_blank"><img src="./.github/preview-small.png" alt="Mobile" height="400" /></a>
 </p>
 
 Check out the app at: 💧 [dripwave.benrogerson.dev](https://dripwave.benrogerson.dev/)
