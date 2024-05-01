@@ -82,10 +82,6 @@ svg {
   @apply px-5 pb-4;
 }
 
-.rhap_progress-section {
-  @apply flex items-center;
-}
-
 .player-small .rhap_controls-section * {
   @apply overflow-hidden;
 }
@@ -100,6 +96,14 @@ svg {
 
 .player-small .rhap_main-controls-button {
   @apply block;
+}
+
+.player-small .rhap_controls-section {
+  @apply min-h-[56px];
+}
+
+.player-large .rhap_progress-section {
+  @apply flex min-h-[107px] items-center;
 }
 
 .player-large .rhap_progress-section {
